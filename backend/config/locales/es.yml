@@ -1,0 +1,14 @@
+es:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'es inválido'
+      models:
+        product:
+          attributes:
+            name:
+              blank: 'no puede estar en blanco'
+              taken: 'ya está en uso'
+            description:
+              blank: 'no puede estar en blanco'
+              custom_error: 'Este nombre ya está en uso o no puede estar en blanco'

@@ -1,0 +1,124 @@
+<h1>Productos</h1>
+
+<div class="table-responsive">
+<table class="table table-sm table-dark table-striped table-hover">
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Codigo interno</th>
+<th>precio</th>
+<th>Costo</th>
+<th>Activo</th>
+<th>Categoria</th>
+<th>Imagen</th>
+<th>tags</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+<% @products.each do |product| %>
+<tr>
+<td><%= product.name %></td>
+<td><%= product.description %></td>
+<td><%= product.internal_code %></td>
+<td><%= product.price %></td>
+<td><%= product.cost %></td>
+<td><%= product.active %></td>
+<td><%= product.category.name %></td>
+<td class="img-td">
+<% if product.main_image.attached? %>
+<%= image_tag product.main_image %>
+<% else %>
+<p>Este producto no tiene imagen</p>
+<% end %>
+</td>
+
+<td>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+Ver tags
+</a>
+<ul class="dropdown-menu dropdown-menu-dark">
+<% product.tags.each do |tag| %>
+<li class="dropdown-item"><%= tag.tagname %></li>
+<li><hr class="dropdown-divider"></li>
+<% end %>
+</ul>
+</li>
+</td>
+
+<td >
+<div class="btn-group">
+<%= link_to 'Ver', admin_product_path(product), class:"btn btn-info" %>
+<%= link_to 'Editar', edit_admin_product_path(product), class:"btn btn-primary" %>
+<%= link_to 'Borrar', admin_product_path(product), method: :delete, data: { confirm: 'Estas seguro?' }, class:"btn btn-danger" %>
+</div>
+</td>
+</tr>
+<% end %>
+
+</tbody>
+</table>
+<div class="pagination">
+<%= will_paginate @products,  previous_label: '<', next_label: '>', page_links: false %>
+</div>
+</div>
+<br>
+
+
+
+
+
+
+<div>
+
+<%= form_tag(admin_products_path, method: :get) do %>
+
+<div class="form-group products-list">
+
+<div class="filter-gap"> 
+<div>
+<%= text_field_tag(:name, params[:name], placeholder: 'Nombre', class:"form-control") %>
+</div>
+
+<div>
+<%= select_tag(:category_id, options_for_select(Category.all.map { |c| [c.name, c.id] }, params[:category_id]), prompt: 'Categoria', class: "form-control", id: "exampleFormControlSelect1") %>
+</div>
+
+<div>
+<%= select_tag :sort_order, options_for_select([["Orden alfabetico", ""], ["A to Z", "asc"], ["Z to A", "desc"]], params[:sort_order]), class: "form-control", id: "exampleFormControlSelect1" %>
+</div>
+
+<div>
+<%= select_tag :sort_by_creation, options_for_select([["Ordenar por fecha", ""], ["Mas nuevo", "newest_first"], ["Mas viejo", "oldest_first"]], params[:sort_by_creation]), class: "form-control", id: "exampleFormControlSelect1" %>
+</div>
+
+<div>
+<%= select_tag :sort_by_price, options_for_select([["Ordenar por precio", ""], ["Menor a mayor precio", "asc"], ["Mayor a menor precio", "desc"]], params[:sort_by_price]), class: "form-control", id: "exampleFormControlSelect1" %>
+</div>
+
+<div class="btn-group" >
+<%= submit_tag('Filtrar', class: 'btn btn-primary') %>
+<%= link_to 'Nuevo producto', new_admin_product_path, class:"btn btn-success" %>
+</div>
+</div>
+
+
+<div>
+<p>Tags</p>
+<% Tag.all.each do |tag| %>
+<div class="form-check">
+<%= collection_check_boxes(:product, :tag_ids, [tag], :id, :tagname, { checked: params.dig(:product, :tag_ids) }, multiple: true, class: 'form-check-input') %>
+</div>
+<% end %>
+</div>
+
+</div>
+<% end %>
+</div>
+
+
+

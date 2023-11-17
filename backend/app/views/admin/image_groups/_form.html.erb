@@ -1,0 +1,35 @@
+
+
+<%= form_with model: @image_group, url: admin_image_group_path(@image_group), local: true, html: { multipart: true }, method: :patch do |form| %>
+  <div class="container-image-groups">
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", required: true  %>
+  </div>
+
+  <div class="form-group">
+
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+
+    <% if @image_group.images.attached? && action_name == "edit" %>
+      <p>Imágenes actuales:</p>
+      <ul class="thumbnail-image-groups">
+        <% @image_group.images.each do |image| %>
+          <% if @image_group.persisted? && image.id.present? %>
+            <li>
+              <%= image_tag image, style: 'max-width: 50px; max-height: 50px;', loading: 'lazy' %>
+              <%= link_to 'Borrar', remove_image_admin_image_group_path(@image_group, image_id: image.id), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+
+  </div>
+  
+  <div class="actions btn-group">
+    <%= form.submit "Actualizar", class: "btn btn-primary" %>
+    <%= link_to 'Atrás', admin_configuracion_sitio_path, class: "btn btn-secondary" %>
+  </div>
+  </div>
+<% end %>

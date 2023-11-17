@@ -1,0 +1,100 @@
+<%= form_with(model: [:admin, product], local: true, class:"row g-3") do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="col-md-6">
+    <%= form.label :name %>
+    <div>
+    <%= form.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :descripcion %>
+    <div>
+    <%= form.text_area :description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :precio %>
+    <div>
+    <%= form.text_field :price, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :costo %>
+    <div>
+    <%= form.text_field :cost, class: "form-control" %>
+    </div>
+  </div>
+
+
+    <div class="form-group">
+    <%= form.label :categoria %>
+    <div>
+    <%= form.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a Category' }, class: "form-control") %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :images %>
+    <div>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+    </div>
+
+    <% if product.images.attached? && action_name == "edit" %>
+      <p>Imagenes actuales:</p>
+      <ul>
+        <% product.images.each do |image| %>
+          <% if product.persisted? && image.id.present? %>
+            <li>
+              <%= image_tag image, class: 'img-thumbnail',style: 'max-width: 100px; max-height: 100px;', loading: 'lazy' %>
+              <%= link_to 'Borrar', remove_image_admin_product_path(product, image_id: image.id), method: :delete, data: { confirm: 'Estás seguro?' }, class:"btn btn-danger" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :activo, class: "form-check-label" %>
+    <div>
+    <%= form.check_box :active, class: "form-check-input" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <% if action_name == "edit" %>
+    <div class="btn-group">
+      <%= form.submit "Actualizar", class: "btn btn-primary" %>
+      <%= link_to 'Atras', admin_products_path, class:"btn btn-secondary" %>
+      </div>
+    <% else %>
+    <div class="btn-group">
+      <%= form.submit "Crear", class: "btn btn-primary" %>
+      <%= link_to 'Atras', admin_products_path, class:"btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+  </div>
+<div>
+<p>Tags<p>
+<% Tag.all.each do |tag| %>
+  <div class="form-check">
+      <%= collection_check_boxes(:product, :tag_ids, [tag], :id, :tagname, { checked: params.dig(:product, :tag_ids) }, multiple: true, class: 'form-check-input') %>
+    <%= label_tag("tag_#{tag.id}", tag.tagname, class: 'form-check-label', for: "tag_#{tag.id}") %>
+  </div>
+<% end %>
+
+
+<% end %>

@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--skeleton);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  background-color: var(--grey);
+  color: var(--skeleton);
+}
+
+.imgContainer {
+  > img {
+    border-top-right-radius: var(--radius);
+    border-top-left-radius: var(--radius);
+    width: 210px;
+    height: 180px;
+    object-fit: cover;
+  }
+}
+
+.skeletonDataInfo {
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  gap: 5px;
+}
+
+.skeletonDataName {
+  border-bottom: 1px solid var(--skeleton);
+  background-color: var(--skeleton);
+  border-radius: var(--radius);
+  > h4 {
+    margin: 0;
+  }
+  > p {
+    padding-bottom: 8px;
+    margin: 0;
+  }
+}
+
+.description {
+  min-height: 130px;
+  background-color: var(--skeleton);
+  border-radius: var(--radius);
+}
+.category {
+  background-color: var(--skeleton);
+  border-radius: var(--radius);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-content: center;
+  min-height: 80px;
+}
+
+.tag {
+  border: 1px solid var(--skeleton);
+  background-color: var(--skeleton);
+
+  color: var(--skeleton);
+  border-radius: var(--radius);
+  font-size: 12px;
+  padding: 2px;
+}
+
+.btnSkeleton {
+  padding: 7px 12px;
+  background-color: var(--skeleton);
+  background-color: var(--skeleton);
+  border: none;
+  width: 100%;
+}

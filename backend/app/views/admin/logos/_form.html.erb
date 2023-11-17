@@ -1,0 +1,14 @@
+<%= form_with model: @logo, url: admin_logos_path, method: :patch, local: true do |form| %>
+ <div class="form-container-logos">
+  <div class="form-group">
+    <%= form.label :file, "Cargar Logo" %>
+    <%= form.file_field :file, class: "form-control" %>
+  </div>
+  <div class="actions btn-group">
+    <%= form.submit "Guardar", class:"btn btn-primary" %>
+    <%= link_to 'Atras', admin_configuracion_sitio_path, class:"btn btn-secondary" %>
+  </div>
+  </div>
+<% end %>
+
+

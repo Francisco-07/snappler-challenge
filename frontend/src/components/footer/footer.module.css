@@ -1,0 +1,35 @@
+.container {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  margin-top: 30px;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+
+  padding: 40px 0;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  bottom: 0;
+}
+.container svg {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.icon {
+  border: 1px solid var(--primary-color);
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.icon:hover {
+  opacity: 1;
+}

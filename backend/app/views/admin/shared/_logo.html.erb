@@ -1,0 +1,19 @@
+<h1>Logo</h1>
+
+<div class="container-logo">
+<% if @logo %>
+  <div class="logo">
+    <%= image_tag @logo.file if @logo.file.attached? %>
+  </div>
+
+ <div class="btn-group">
+  <%= link_to "Editar Logo", edit_admin_logos_path(@logo), class:"btn btn-primary" %>
+  <%= link_to "Eliminar Logo", admin_logos_path(@logo), method: :delete, data: { confirm: "¿Estás seguro?" }, class: "btn btn-danger" %>
+</div>
+<% else %>
+<div>
+  <p>No se ha cargado ningún logo todavía.</p>
+  <%= link_to "Cargar logo", edit_admin_logos_path, class:"btn btn-success" %>
+  <div>
+<% end %>
+<div>

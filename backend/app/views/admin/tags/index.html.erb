@@ -1,0 +1,29 @@
+<h1>Tags</h1>
+
+<table class="table table-dark table-sm table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Id</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+ <div class="pagination">
+<%= will_paginate @tags,  previous_label: '<', next_label: '>', page_links: false %>
+</div>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.tagname %></td>
+        <td><%= tag.id %></td>
+        <td>
+         <div class="btn-group">
+        <%= link_to 'Editar', edit_admin_tag_path(tag), class:"btn btn-primary" %>
+        <%= link_to 'Borrar', admin_tag_path(tag), method: :delete, data: { confirm: 'Estas seguro?' }, class:"btn btn-danger" %>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Nuevo tag', new_admin_tag_path, class:"btn btn-success" %>

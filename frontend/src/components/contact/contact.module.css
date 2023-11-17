@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  & input {
+    width: 230px;
+    height: 35px;
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    border-radius: var(--radius);
+  }
+  & textarea {
+    height: 70px;
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    border-radius: var(--radius);
+  }
+}
+
+.button {
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: var(--radius);
+  &:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+}

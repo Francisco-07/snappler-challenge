@@ -1,0 +1,21 @@
+<%= form_with(model: [:admin, category], local: true) do |form| %>
+
+<div class="form-group form-gutter-categories">
+<%= form.label :nombre %>
+<%= form.text_field :name, class: "form-control", required: true %>
+</div>
+
+<div>
+<% if action_name == "edit" %>
+<div class="actions btn-group">
+<%= form.submit "Actualizar", class:"btn btn-primary" %>
+<%= link_to 'Atras', admin_categories_path, class:"btn btn-secondary" %>
+</div>
+<% else %>
+<div class="actions btn-group">
+<%= form.submit "Crear" , class:"btn btn-primary"%>
+<%= link_to 'Atras', admin_categories_path, class:"btn btn-secondary" %>
+</div>
+<% end %>
+</div>
+<% end %>

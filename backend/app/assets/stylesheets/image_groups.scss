@@ -1,0 +1,23 @@
+.container-image-groups {
+  > div {
+    padding: 10px 0;
+  }
+}
+
+.thumbnail-image-groups {
+  display: flex;
+  padding: 0;
+  width: 300px;
+  gap: 15px;
+  flex-wrap: wrap;
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}

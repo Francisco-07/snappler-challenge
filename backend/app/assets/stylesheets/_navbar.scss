@@ -1,0 +1,36 @@
+.border-navbar {
+  border-bottom: 1px solid white;
+  margin-bottom: 35px;
+  a {
+    color: white;
+  }
+}
+
+.sidebar-show-hide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  border: none;
+  z-index: 900;
+  padding: 15px 40px;
+  background-color: transparent;
+  transform: scale(2.5);
+}
+
+.position-button {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute !important;
+}
+
+@media (max-width: 1024px) {
+  .brand-space {
+    margin-left: 100px;
+  }
+  .dropdown-space {
+    margin-right: 100px;
+  }
+}

@@ -1,0 +1,19 @@
+<%= form_with(model: [:admin, tag], local: true) do |form| %>
+  <div class="form-group form-gutter-tags">
+    <%= form.label :Nombre_del_tag %>
+    <%= form.text_field :tagname, class: "form-control", required: true  %>
+  </div>
+ 
+<% if action_name == "edit" %>
+  <div class="actions btn-group">
+    <%= form.submit "Actualizar", class:"btn btn-primary" %>
+    <%= link_to 'Atras', admin_tags_path, class:"btn btn-secondary" %>
+  </div>
+<% else %>
+  <div class="actions btn-group">
+    <%= form.submit "Crear", class:"btn btn-primary" %>
+    <%= link_to 'Atras', admin_tags_path, class:"btn btn-secondary" %>
+  </div>
+<% end %>
+
+<% end %>

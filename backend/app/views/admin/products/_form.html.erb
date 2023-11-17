@@ -1,0 +1,91 @@
+<%= form_with(model: [:admin, product], local: true, class:"row g-3") do |form| %>
+  <% if product.errors.any? %>
+    <div id="product-flash-messages" class="products-alerts">
+        <% product.errors.full_messages.each do |message| %>
+          <div class="product-alert"><%= message %></div>
+        <% end %>
+    </div>
+  <% end %>
+  <div class="form-group col-md-4">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <%= form.label :descripcion %>
+    <%= form.text_area :description, class: "form-control", required: true  %>
+  </div>
+   <div class="form-group col-md-4">
+    <%= form.label :categoria %>
+    <%= form.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a Category' }, class: "form-control", required: true ) %>
+  </div>
+  <div class="form-group col-md-4">
+    <%= form.label :costo %>
+    <%= form.text_field :cost, class: "form-control", required: true  %>
+  </div>
+    <div class="form-group col-md-4">
+    <%= form.label :precio %>
+    <%= form.text_field :price, class: "form-control" , required: true %>
+  </div>
+
+<div class="col-md-4">
+   <%= form.label :activo, class: "form-check-label" %>
+    <%= form.check_box :active, class: "form-check-input"%>
+</div>
+<div class="col-md-4">
+ <%= form.label :imagen_principal %>
+<%= form.file_field :main_image, class: "form-control" %>
+ <% if product.main_image.attached? && action_name == "edit" %>
+      <p>Imagen actual:</p>
+      <ul class="thumbnail-product">
+          <% if product.persisted? && product.main_image.id.present? %>
+            <li >
+              <%= image_tag product.main_image, class: 'img-thumbnail',style: 'max-width: 70px; max-height: 70px;', loading: 'lazy' %>
+              <%= link_to 'Borrar', remove_main_image_admin_product_path(product, main_image_id: product.main_image.id), method: :delete, data: { confirm: 'Estás seguro?' }, class:"btn btn-danger" %>
+            </li>
+        <% end %>
+      </ul>
+    <% end %>
+</div>
+  <div class="form-group col-md-4">
+    <%= form.label :imagenes_adicionales %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+
+    <% if product.images.attached? && action_name == "edit" %>
+      <p>Imagenes actuales:</p>
+      <ul class="thumbnail-product">
+        <% product.images.each do |image| %>
+          <% if product.persisted? && image.id.present? %>
+            <li>
+              <%= image_tag image, class: 'img-thumbnail',style: 'max-width: 70px; max-height: 70px;', loading: 'lazy' %>
+              <%= link_to 'Borrar', remove_image_admin_product_path(product, image_id: image.id), method: :delete, data: { confirm: 'Estás seguro?' }, class:"btn btn-danger" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="form group col-md-4">
+<p>Tags<p>
+<% Tag.all.each do |tag| %>
+  <div class="form-check">
+      <%= collection_check_boxes(:product, :tag_ids, [tag], :id, :tagname, { checked: params.dig(:product, :tag_ids) }, multiple: true, class: 'form-check-input' ) %>
+  </div>
+<% end %>
+</div>
+  <div class="form-group col-md-4">
+  </div>
+  <div class="form-group">
+    <% if action_name == "edit" %>
+    <div class="btn-group">
+      <%= form.submit "Actualizar", class: "btn btn-primary" %>
+      <%= link_to 'Atras', admin_products_path, class:"btn btn-secondary" %>
+      </div>
+    <% else %>
+    <div class="btn-group">
+      <%= form.submit "Crear", class: "btn btn-primary" %>
+      <%= link_to 'Atras', admin_products_path, class:"btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

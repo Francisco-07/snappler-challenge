@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-navbar position-button">
+   <div class="container">
+    <%= link_to 'Marca', root_path, class: "navbar-brand brand-space" %>
+
+    <div>
+      <ul class="navbar-nav ms-auto dropdown-space">
+        <% if current_user %>
+    <button id="toggleSidebar" class="sidebar-show-hide">&harr;</button>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_user.user_name %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li class="dropdown-item"><%= link_to 'Editar Cuenta', edit_admin_user_path(current_user) %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="dropdown-item"><%= link_to 'Desconectarse', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+        <% else %>
+        <li class="nav-item">
+          <div>Debes iniciar sesion</div>
+        </li>
+        <% end %>
+      </ul>
+  </div>
+    </div>
+
+</nav>

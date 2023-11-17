@@ -1,0 +1,46 @@
+<h1>Grupo de imagenes</h1>
+
+<table class="table table-dark table-sm table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Favorito</th>
+      <th>Imagen</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+<div class="pagination">
+<%= will_paginate @image_groups,  previous_label: '<', next_label: '>', page_links: false %>
+</div>
+  <tbody>
+    <% @image_groups.each do |image_group| %>
+      <tr>
+        <td><%= image_group.name %></td>
+        <td>
+          <% if image_group.is_favorite? %>
+            Si
+          <% else %>
+            No
+          <% end %>
+        </td>
+           <td class="img-td", style='text-align: start;'>
+          <% if image_group.images.present? %>
+          <%= image_tag image_group.images.first, loading: 'lazy',style: 'max-width: 70px; max-height: 70px;' %>
+          <% else %>
+          <p>Este Grupo no tiene imágenes</p>
+          <% end %>
+        </td>
+        <td>
+         <div class="btn-group">
+        <%= link_to 'Editar', edit_admin_image_group_path(image_group), class: "btn btn-primary" %>
+        <%= link_to 'Borrar', admin_image_group_path(image_group), method: :delete, data: { confirm: '¿Estás seguro de que quieres borrar este grupo?' }, class: "btn btn-danger" %>
+        <%= link_to 'Favorito', select_admin_image_group_path(image_group), method: :post, remote: true,  class: "btn btn-warning"%>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "Nuevo grupo de imagenes", new_admin_image_group_path, class:"btn btn-success" %>

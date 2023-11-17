@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.pagBtn {
+  border: 2px solid var(--secondary-color);
+  padding: 5px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+}

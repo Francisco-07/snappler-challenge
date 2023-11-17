@@ -1,0 +1,29 @@
+#sidebar {
+  background-color: #343a40;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  transition: left 0.3s;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  z-index: 800;
+}
+
+.sidebar-container {
+  display: flex;
+  a {
+    color: rgba(255, 255, 255, 0.74);
+  }
+  a:hover {
+    color: white;
+  }
+}
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

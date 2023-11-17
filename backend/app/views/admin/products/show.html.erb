@@ -1,0 +1,69 @@
+<h1>Info del prodcuto</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Codigo interno:</strong>
+  <%= @product.internal_code %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @product.price %>
+</p>
+
+
+<p>
+  <strong>Costo:</strong>
+  <%= @product.cost %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @product.active %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @product.category.name  %>
+</p>
+<div>
+<% @product.tags.each do |tag| %>
+<strong>Tags:</strong>
+<p ><%= tag.tagname %></p>
+<% end %>
+
+<strong>Imagen principal</strong>
+<div class="img-td">
+<% if @product.main_image.attached? %>
+<%= image_tag @product.main_image %>
+<% else %>
+<p>Este producto no tiene imagen</p>
+<% end %>
+</div>
+</div>
+    <% if @product.images.attached?  %>
+      <strong>Imagenes actuales:</strong>
+      <ul class="thumbnail-product">
+        <% @product.images.each do |image| %>
+          <% if @product.persisted? && image.id.present? %>
+            <li>
+              <%= image_tag image, class: 'img-thumbnail',style: 'max-width: 70px; max-height: 70px;', loading: 'lazy' %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+
+<div class="btn-group">
+<%= link_to 'Editar', edit_admin_product_path(@product), class:"btn btn-primary" %> 
+<%= link_to 'Atras', admin_products_path, class:"btn btn-secondary" %>
+</div>

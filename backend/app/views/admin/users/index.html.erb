@@ -1,0 +1,30 @@
+<h1>Lista de usuarios</h1>
+
+<table class="table table-sm table-dark  table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <div class="pagination">
+<%= will_paginate @users,  previous_label: '<', next_label: '>', page_links: false %>
+</div>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.admin ? 'Si' : 'No' %></td>
+        <td >
+        <div class="btn-group">
+          <%= link_to 'Editar', edit_admin_user_path(user), class:"btn btn-primary" %>
+          <%= link_to 'Borrar', admin_user_path(user), method: :delete, data: { confirm: 'Estas seguro?' }, class:"btn btn-danger" %>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nuevo usuario', new_admin_user_path, class:"btn btn-success" %>

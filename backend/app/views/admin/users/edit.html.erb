@@ -1,0 +1,41 @@
+<h1>Editar Usuario</h1>
+
+<%= form_with(model: @user, url: admin_user_path(@user), method: :patch) do |form| %>
+<div class="form-gutter-users">
+<div class="form-group">
+  <%= form.label :nombre_de_usuario %>
+  <%= form.text_field :user_name, class: "form-control", required: true  %>
+</div>
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control" , required:true %>
+  </div>
+
+ <div class="form-group">
+    <%= form.label :contraseña %>
+    <%= form.password_field :password, class: "form-control", required:true %>
+  </div>
+
+   <div class="form-group">
+    <%= form.label :confirmacion_de_password %>
+    <%= form.password_field :password_confirmation, class: "form-control", required:true %>
+  </div>
+ <% if @user == current_user %>
+  <div class="form-group">
+    <%= form.label :contraseña_actual %>
+    <%= form.password_field :current_password, class: "form-control", required:true %>
+  </div>
+<% end %> 
+  <div class="form-check">
+    <%= form.label :adminss %>
+    <%= form.check_box :admin, class: "form-check-input" %>
+  </div>
+
+
+  <div class="actions btn-group form-gutter-users">
+    <%= form.submit 'Actualizar', class:"btn btn-primary" %>
+    <%= link_to 'Atras', admin_users_path, class:"btn btn-secondary" %>
+  </div>
+  </div>
+<% end %>
+
